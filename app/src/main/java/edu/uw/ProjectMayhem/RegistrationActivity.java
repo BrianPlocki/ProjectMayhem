@@ -255,7 +255,6 @@ public class RegistrationActivity extends ActionBarActivity {
             String parameters = ("access=" + "66E2094E"
                                   +"&email=" + mUser.getEmail()
                                   +"&pass=" + mUser.getPwHash()
-                                  +"&salt=" + mUser.getSalt()
                                   +"&q=" + mUser.getSecurityQuestion()
                                   +"&a=" + mUser.getSecurityAnswer());
             try

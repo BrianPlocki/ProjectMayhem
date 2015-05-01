@@ -147,6 +147,46 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        //SQL test++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        MovementDBHandler myData = new MovementDBHandler(this);
+
+        List<MovementData> moves = myData.getAllMovement();
+
+        for (MovementData md : moves) {
+
+            myData.deleteMovement(md);
+        }
+
+        myData.addMovement(new MovementData(22.2,11.1,55.0,"NORTH",11,"12:00AM"));
+        myData.addMovement(new MovementData(33.3,22.2,62.0,"SOUTH",12,"1:00PM"));
+        myData.addMovement(new MovementData(44.4,33.1,78.0,"EAST",13,"4:00AM"));
+        myData.addMovement(new MovementData(55.5,44.1,100.0,"WEST",14,"10:00AM"));
+
+        for (MovementData m : moves) {
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(m.getLatitude());
+            sb.append("----");
+            sb.append(m.getLongitude());
+            sb.append("----");
+            sb.append(m.getSpeed());
+            sb.append("----");
+            sb.append(m.getHeading());
+            sb.append("----");
+            sb.append(m.getSourceID());
+            sb.append("----");
+            sb.append(m.getTimeStamp());
+
+            Log.d("+++++++++++++++","TEST DATA TEST************");
+            Log.d("Data: ", sb.toString());
+
+            String c = myData.getMovementCount()+"";
+
+            Log.d("+++++++++++++++","COUNT************");
+            Log.d("Count: ", c);
+        }
     }
 
     /** Starts the "reset password" screen. */
@@ -412,7 +452,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                 } else {
 
                     // Hash the entered password using the salt and compare to saved password.
-                    String enteredPass = BCrypt.hashpw(mUserPassword, savedSalt);
+                    String enteredPass = mUserPassword;
 
                     if (enteredPass.equals(savedPass)) {
 

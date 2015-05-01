@@ -22,9 +22,6 @@ public final class User implements Serializable {
     /** The answer for the security question. */
     private String mSecurityAnswer;
 
-    /** Salt for the new password (used for hashing). */
-    private String salt = BCrypt.gensalt();
-
     /** The bcrypt hash of the new password (for secure transmission). */
     private String pwHash;
 
@@ -43,7 +40,7 @@ public final class User implements Serializable {
         mPassword = password;
         mSecurityQuestion = question;
         mSecurityAnswer = answer;
-        pwHash = BCrypt.hashpw(password, salt);
+
     }
 
     /**
@@ -79,13 +76,6 @@ public final class User implements Serializable {
      */
     public String getPwHash() {
         return pwHash;
-    }
-
-    /**
-     * @return the salt used to hash the password.
-     */
-    public String getSalt() {
-        return salt;
     }
 
     /** To DO */
